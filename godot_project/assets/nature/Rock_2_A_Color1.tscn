@@ -1,0 +1,5 @@
+[gd_scene load_steps=2 format=3 uid="uid://3cpr8ucptzc6"]
+
+[ext_resource type="PackedScene" uid="uid://55esbh0qdz2p" path="res://assets/nature/Rock_2_A_Color1.fbx" id="1_Rock_2_A_Color1"]
+
+[node name="Rock_2_A_Color1" instance=ExtResource("1_Rock_2_A_Color1")]

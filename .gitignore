@@ -1,0 +1,21 @@
+# Godot
+.godot/
+*.import
+
+# Large asset packs (download separately)
+*.zip
+mountains/*.tif
+mountains/*.obj
+
+# Large mountain assets (too big for GitHub)
+godot_project/assets/nature/mountain.obj
+godot_project/assets/nature/mountain_color.png
+godot_project/assets/nature/mountain_normal.png
+
+# Python cache
+__pycache__/
+*.pyc
+
+# OS files
+.DS_Store
+Thumbs.db

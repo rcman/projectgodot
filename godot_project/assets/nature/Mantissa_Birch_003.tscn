@@ -1,0 +1,5 @@
+[gd_scene load_steps=2 format=3 uid="uid://g2stfy3xiflt"]
+
+[ext_resource type="PackedScene" uid="uid://bzlday1wvi6q" path="res://assets/nature/Mantissa_Birch_003.FBX" id="1_Mantissa_Birch_003"]
+
+[node name="Mantissa_Birch_003" instance=ExtResource("1_Mantissa_Birch_003")]

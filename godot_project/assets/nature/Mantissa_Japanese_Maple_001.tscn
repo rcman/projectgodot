@@ -1,0 +1,5 @@
+[gd_scene load_steps=2 format=3 uid="uid://0qltyr349b0n"]
+
+[ext_resource type="PackedScene" uid="uid://4q3n6k4lf1yz" path="res://assets/nature/Mantissa_Japanese_Maple_001.FBX" id="1_Mantissa_Japanese_Maple_001"]
+
+[node name="Mantissa_Japanese_Maple_001" instance=ExtResource("1_Mantissa_Japanese_Maple_001")]

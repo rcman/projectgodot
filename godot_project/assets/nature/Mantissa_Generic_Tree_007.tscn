@@ -1,0 +1,5 @@
+[gd_scene load_steps=2 format=3 uid="uid://vq13dgfaodtk"]
+
+[ext_resource type="PackedScene" uid="uid://npb1dn09exyk" path="res://assets/nature/Mantissa_Generic_Tree_007.FBX" id="1_Mantissa_Generic_Tree_007"]
+
+[node name="Mantissa_Generic_Tree_007" instance=ExtResource("1_Mantissa_Generic_Tree_007")]

@@ -1,0 +1,5 @@
+[gd_scene load_steps=2 format=3 uid="uid://rn1gqpgdolag"]
+
+[ext_resource type="PackedScene" uid="uid://7s13dsrf1w91" path="res://assets/nature/Mantissa_Free_Spruce_002.FBX" id="1_Mantissa_Free_Spruce_002"]
+
+[node name="Mantissa_Free_Spruce_002" instance=ExtResource("1_Mantissa_Free_Spruce_002")]
