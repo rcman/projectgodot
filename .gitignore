@@ -12,6 +12,10 @@ godot_project/assets/nature/mountain.obj
 godot_project/assets/nature/mountain_color.png
 godot_project/assets/nature/mountain_normal.png
 
+# Large 4K tree models (>100MB, exceed GitHub limit)
+godot_project/assets/nature/island_tree_4k.glb
+godot_project/assets/nature/pine_tree_4k.glb
+
 # Python cache
 __pycache__/
 *.pyc

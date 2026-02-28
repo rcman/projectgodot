@@ -551,14 +551,14 @@ NEW_TREE_ROLES = {
 USE_NEW_TREES = False  # Disabled - using HQ trees instead
 
 # -------------------------
-# HIGH-QUALITY TREES (GLB format from Blender exports with 1K textures)
+# HIGH-QUALITY 4K TREES (GLB format from Blender exports)
 # -------------------------
 TREES_HQ_SUBDIR = "assets/nature"
 TREES_HQ_ROLES = {
     "tree_hq_island": ["island_tree_1k.glb"],
     "tree_hq_pine": ["pine_tree_1k.glb"],
 }
-USE_HQ_TREES = True  # Enable high-quality tree models
+USE_HQ_TREES = True  # Enable high-quality tree models (1K for GitHub compatibility)
 
 # Use Kenney trees (higher quality) instead of KayKit
 USE_KENNEY_TREES = False  # Disabled - using photorealistic Mantissa trees instead
