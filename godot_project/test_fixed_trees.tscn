@@ -1,0 +1,46 @@
+[gd_scene load_steps=6 format=3]
+
+[ext_resource type="PackedScene" path="res://assets/nature/island_tree_1k_fixed.tscn" id="1_island"]
+[ext_resource type="PackedScene" path="res://assets/nature/pine_tree_1k.glb" id="2_pine"]
+[ext_resource type="Script" path="res://scripts/fly_camera.gd" id="3_flycam"]
+
+[sub_resource type="ProceduralSkyMaterial" id="sky_mat"]
+sky_top_color = Color(0.4, 0.6, 0.9, 1)
+sky_horizon_color = Color(0.7, 0.8, 0.95, 1)
+
+[sub_resource type="Sky" id="sky"]
+sky_material = SubResource("sky_mat")
+
+[sub_resource type="Environment" id="env"]
+background_mode = 2
+sky = SubResource("sky")
+ambient_light_source = 2
+ambient_light_color = Color(0.9, 0.9, 1.0, 1)
+ambient_light_energy = 0.6
+tonemap_mode = 2
+
+[node name="TestFixedTrees" type="Node3D"]
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("env")
+
+[node name="FlyCamera" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.95, 0.3, 0, -0.3, 0.95, 0, 5, 20)
+current = true
+script = ExtResource("3_flycam")
+move_speed = 10.0
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(0.866, -0.25, 0.433, 0, 0.866, 0.5, -0.5, -0.433, 0.75, 0, 20, 0)
+light_energy = 1.2
+shadow_enabled = true
+
+[node name="IslandTreeFixed" parent="." instance=ExtResource("1_island")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5, 0, 0)
+
+[node name="PineTree" parent="." instance=ExtResource("2_pine")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5, 0, 0)
+
+[node name="Ground" type="CSGBox3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, 0)
+size = Vector3(50, 1, 50)

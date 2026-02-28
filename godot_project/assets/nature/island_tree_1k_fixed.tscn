@@ -1,0 +1,39 @@
+[gd_scene load_steps=7 format=3]
+
+[ext_resource type="PackedScene" path="res://assets/nature/island_tree_1k.glb" id="1"]
+[ext_resource type="Texture2D" path="res://assets/nature/island_tree_1k_island_tree_01_leaves_diff-island_tree_01_leaves_alpha.png" id="2_leaves_diff"]
+[ext_resource type="Texture2D" path="res://assets/nature/island_tree_1k_island_tree_01_leaves_nor_gl_4k.jpg" id="3_leaves_nor"]
+[ext_resource type="Texture2D" path="res://assets/nature/island_tree_1k_island_tree_01_leaves_rough_4k.jpg" id="4_leaves_rough"]
+
+[sub_resource type="StandardMaterial3D" id="leaves_mat"]
+transparency = 2
+alpha_scissor_threshold = 0.5
+alpha_antialiasing_mode = 0
+cull_mode = 0
+albedo_texture = ExtResource("2_leaves_diff")
+normal_enabled = true
+normal_texture = ExtResource("3_leaves_nor")
+roughness_texture = ExtResource("4_leaves_rough")
+
+[sub_resource type="CapsuleShape3D" id="trunk_collision"]
+radius = 0.3
+height = 4.0
+
+[node name="IslandTree1K" type="Node3D"]
+
+[node name="Model" parent="." instance=ExtResource("1")]
+
+[node name="island_tree_01_leaves_a_LOD0" parent="Model" index="5"]
+surface_material_override/0 = SubResource("leaves_mat")
+
+[node name="island_tree_01_leaves_b_LOD0" parent="Model" index="6"]
+surface_material_override/0 = SubResource("leaves_mat")
+
+[node name="island_tree_01_leaves_c_LOD0" parent="Model" index="7"]
+surface_material_override/0 = SubResource("leaves_mat")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="."]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0)
+shape = SubResource("trunk_collision")
