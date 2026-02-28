@@ -54,6 +54,7 @@ PATH_CONTROL_POINTS = 8
 PATH_WANDER         = 18.0
 SCATTER_INNER       = 2.5
 SCATTER_OUTER       = 14.0
+TREE_SCATTER_OUTER  = 60.0  # Trees spread much further from path for forest coverage
 OBJECTS_PER_SEGMENT = 6  # Reduced for faster loading
 SEED                = 42
 
@@ -543,7 +544,17 @@ NEW_TREES_SUBDIR = "assets/new_trees"
 NEW_TREE_ROLES = {
     "new_tree_pack": ["trees9.obj"],  # 9 varied trees in one model
 }
-USE_NEW_TREES = True  # Enable user's new tree models
+USE_NEW_TREES = False  # Disabled - using HQ trees instead
+
+# -------------------------
+# HIGH-QUALITY TREES (GLB format from Blender exports with 1K textures)
+# -------------------------
+TREES_HQ_SUBDIR = "assets/nature"
+TREES_HQ_ROLES = {
+    "tree_hq_island": ["island_tree_1k.glb"],
+    "tree_hq_pine": ["pine_tree_1k.glb"],
+}
+USE_HQ_TREES = True  # Enable high-quality tree models
 
 # Use Kenney trees (higher quality) instead of KayKit
 USE_KENNEY_TREES = False  # Disabled - using photorealistic Mantissa trees instead
@@ -664,6 +675,9 @@ ASSET_PROPERTIES = {
     "kenney_pine_round_2": {"min_spacing": 4.0, "scale_range": (1.8, 3.0), "y_offset": 0.0, "min_altitude": -10.0, "max_altitude": 15.0, "randomize_y_rotation": True, "tilt_angle": 2.0},
     # New user-added trees (OBJ models - 9 varied trees)
     "new_tree_pack": {"min_spacing": 4.0, "scale_range": (0.08, 0.12), "y_offset": 0.0, "min_altitude": -10.0, "max_altitude": 50.0, "randomize_y_rotation": True, "tilt_angle": 2.0},
+    # High-quality trees (GLB format from 4K Blender models) - wider spacing for performance
+    "tree_hq_island": {"min_spacing": 20.0, "scale_range": (0.8, 1.5), "y_offset": 0.0, "min_altitude": -10.0, "max_altitude": 20.0, "randomize_y_rotation": True, "tilt_angle": 2.0},
+    "tree_hq_pine": {"min_spacing": 20.0, "scale_range": (0.8, 1.5), "y_offset": 0.0, "min_altitude": -10.0, "max_altitude": 25.0, "randomize_y_rotation": True, "tilt_angle": 1.5},
 }
 
 # Default properties for unknown assets
@@ -754,8 +768,9 @@ REALISTIC_TREE_CATEGORY = [
 
 ASSET_CATEGORIES = {
     "trees": (
+        ["tree_hq_island", "tree_hq_pine"] if USE_HQ_TREES else
         ["new_tree_pack"] if USE_NEW_TREES else [
-            # KayKit trees only when new trees disabled
+            # KayKit trees only when other trees disabled
             "tree_pine_1", "tree_pine_2", "tree_pine_3",
             "tree_tall_1", "tree_tall_2", "tree_tall_3", "tree_tall_4", "tree_tall_5",
             "tree_oak_1", "tree_oak_2", "tree_oak_3",
@@ -2360,13 +2375,13 @@ def generate_placements(path_pts, tscn_paths, secondary_paths=None):
     # Generate clearings (some become ponds)
     clearings, ponds = generate_clearings(path_pts)
 
-    # Calculate placement area bounds
+    # Calculate placement area bounds (use TREE_SCATTER_OUTER for wider coverage)
     all_x = [p[0] for p in path_pts]
     all_z = [p[1] for p in path_pts]
-    x_min = min(all_x) - SCATTER_OUTER
-    x_max = max(all_x) + SCATTER_OUTER
-    z_min = min(all_z) - SCATTER_OUTER
-    z_max = max(all_z) + SCATTER_OUTER
+    x_min = min(all_x) - TREE_SCATTER_OUTER
+    x_max = max(all_x) + TREE_SCATTER_OUTER
+    z_min = min(all_z) - TREE_SCATTER_OUTER
+    z_max = max(all_z) + TREE_SCATTER_OUTER
 
     # Use Poisson Disc Sampling if enabled (from C# PoissonDisc.cs)
     if USE_POISSON_SAMPLING:
@@ -2394,10 +2409,10 @@ def generate_placements(path_pts, tscn_paths, secondary_paths=None):
                     if d < min_path_dist:
                         min_path_dist = d
                         nearest_path_idx = i
-                if min_path_dist > SCATTER_OUTER or min_path_dist < SCATTER_INNER:
+                if min_path_dist > TREE_SCATTER_OUTER or min_path_dist < SCATTER_INNER:
                     continue
-                # Randomly decide to place a tree (30% chance per valid point)
-                if random.random() > 0.30:
+                # Randomly decide to place a tree (50% chance per valid point for better coverage)
+                if random.random() > 0.50:
                     continue
                 role = random.choice(tree_roles)
                 props = get_asset_props(role)
@@ -3058,6 +3073,22 @@ if __name__ == "__main__":
                         break
         else:
             print(f"  New trees folder not found: {new_trees_dir}")
+
+    # Load high-quality trees if enabled
+    if USE_HQ_TREES:
+        print("\n[Step 3b] Loading high-quality tree models...")
+        trees_hq_dir = os.path.join(project_dir, TREES_HQ_SUBDIR)
+        if os.path.exists(trees_hq_dir):
+            for role, candidates in TREES_HQ_ROLES.items():
+                for candidate in candidates:
+                    model_path = os.path.join(trees_hq_dir, candidate)
+                    if os.path.exists(model_path):
+                        # GLB files are loaded directly as scenes in Godot
+                        tscn_paths[role] = f"res://{TREES_HQ_SUBDIR}/{candidate}"
+                        print(f"  Loaded [{role}] <- {candidate}")
+                        break
+        else:
+            print(f"  HQ trees folder not found: {trees_hq_dir}")
 
     # Step 3.5: Write player scene
     print("\n[Step 3.5] Writing player scene...")

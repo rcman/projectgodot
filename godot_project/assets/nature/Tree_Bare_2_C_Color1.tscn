@@ -1,5 +1,0 @@
-[gd_scene load_steps=2 format=3 uid="uid://cql2ctnrb5zh"]
-
-[ext_resource type="PackedScene" uid="uid://yw7jv2sglfry" path="res://assets/nature/Tree_Bare_2_C_Color1.fbx" id="1_Tree_Bare_2_C_Color1"]
-
-[node name="Tree_Bare_2_C_Color1" instance=ExtResource("1_Tree_Bare_2_C_Color1")]
