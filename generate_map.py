@@ -395,6 +395,10 @@ TERRAIN_PASSES = [
 # -------------------------
 
 KAYKIT_ASSET_ROLES = {
+    # KayKit assets disabled - using HQ trees instead
+}
+
+KAYKIT_ASSET_ROLES_DISABLED = {
     # role -> list of possible filenames (first match found will be used)
     # Supports GLB, FBX, and OBJ formats
 
@@ -692,61 +696,62 @@ DEFAULT_ASSET_PROPS = {
 }
 
 # Biome definitions - weights for each asset category
+# NOTE: Only trees enabled - KayKit assets removed
 BIOMES = {
     "forest": {
-        "trees": 0.60,  # Increased for more tree coverage
+        "trees": 1.0,  # Only HQ trees
         "trees_bare": 0.0,
-        "boulders": 0.05,
-        "rocks": 0.05,
-        "bushes": 0.15,
-        "ferns": 0.10,
-        "grass": 0.05,
+        "boulders": 0.0,
+        "rocks": 0.0,
+        "bushes": 0.0,
+        "ferns": 0.0,
+        "grass": 0.0,
     },
     "rocky": {
-        "trees": 0.08,
+        "trees": 1.0,
         "trees_bare": 0.0,
-        "boulders": 0.20,
-        "rocks": 0.30,
-        "bushes": 0.12,
-        "ferns": 0.15,
-        "grass": 0.15,
+        "boulders": 0.0,
+        "rocks": 0.0,
+        "bushes": 0.0,
+        "ferns": 0.0,
+        "grass": 0.0,
     },
     "meadow": {
-        "trees": 0.10,
+        "trees": 1.0,
         "trees_bare": 0.0,
-        "boulders": 0.03,
-        "rocks": 0.07,
-        "bushes": 0.15,
-        "ferns": 0.30,
-        "grass": 0.35,
+        "boulders": 0.0,
+        "rocks": 0.0,
+        "bushes": 0.0,
+        "ferns": 0.0,
+        "grass": 0.0,
     },
     "winter": {
-        "trees": 0.10,
-        "trees_bare": 0.25,
-        "boulders": 0.15,
-        "rocks": 0.25,
-        "bushes": 0.05,
-        "ferns": 0.10,
-        "grass": 0.10,
+        "trees": 1.0,
+        "trees_bare": 0.0,
+        "boulders": 0.0,
+        "rocks": 0.0,
+        "bushes": 0.0,
+        "ferns": 0.0,
+        "grass": 0.0,
     },
     "autumn": {
-        "trees": 0.20,
-        "trees_bare": 0.15,
-        "boulders": 0.08,
-        "rocks": 0.12,
-        "bushes": 0.18,
-        "ferns": 0.15,
-        "grass": 0.12,
+        "trees": 1.0,
+        "trees_bare": 0.0,
+        "boulders": 0.0,
+        "rocks": 0.0,
+        "bushes": 0.0,
+        "ferns": 0.0,
+        "grass": 0.0,
     },
     "realistic": {
-        "trees_realistic": 0.60,  # Realistic Mantissa trees
-        "trees": 0.0,             # No stylized trees
+        "trees_realistic": 0.0,
+        "trees": 1.0,  # Only HQ trees
         "trees_bare": 0.0,
-        "boulders": 0.08,
-        "rocks": 0.12,
-        "bushes": 0.10,
-        "ferns": 0.05,
-        "grass": 0.05,
+        "boulders": 0.0,
+        "rocks": 0.0,
+        "bushes": 0.0,
+        "ferns": 0.0,
+        "grass": 0.0,
     },
 }
 
@@ -781,23 +786,11 @@ ASSET_CATEGORIES = {
         "tree_bare_1", "tree_bare_2", "tree_bare_3",
         "tree_bare_4", "tree_bare_5", "tree_bare_6",
     ],
-    "boulders": [
-        "rock_boulder_1", "rock_boulder_2", "rock_boulder_3", "rock_boulder_4",
-        "rock_boulder_5", "rock_boulder_6", "rock_boulder_7",
-    ],
-    "rocks": [
-        "rock_medium_1", "rock_medium_2", "rock_medium_3",
-        "rock_medium_4", "rock_medium_5", "rock_medium_6",
-        "rock_small_1", "rock_small_2", "rock_small_3",
-        "rock_small_4", "rock_small_5", "rock_small_6",
-    ],
-    "bushes": [
-        "bush_round_1", "bush_round_2", "bush_round_3", "bush_round_4",
-        "bush_tall_1", "bush_tall_2", "bush_tall_3",
-        "bush_wide_1", "bush_wide_2",
-    ],
-    "ferns": ["fern_1", "fern_2", "fern_3", "fern_4"],
-    "grass": ["grass_1", "grass_2", "grass_3", "grass_4"],
+    "boulders": [],  # KayKit assets removed
+    "rocks": [],  # KayKit assets removed
+    "bushes": [],  # KayKit assets removed
+    "ferns": [],  # KayKit assets removed
+    "grass": [],  # KayKit assets removed
     "trees_realistic": [
         "real_maple_1", "real_maple_2", "real_maple_3", "real_maple_4", "real_maple_5",
         "real_cherry_1", "real_cherry_2", "real_cherry_3", "real_cherry_4", "real_cherry_5",
